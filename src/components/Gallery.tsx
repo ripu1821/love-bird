@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
@@ -6,7 +5,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 const galleryImages = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1529634806980-85c3088d5be9?q=80&w=2069",
+    src: "https://images.unsplash.com/photo-1615966650071-855b15f29ad1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3Vuc2V0JTIwY291cGxlfGVufDB8fDB8fHww",
     alt: "Couple laughing together",
   },
   {
@@ -21,17 +20,17 @@ const galleryImages = [
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070",
+    src: "https://akshitphotography.com/wp-content/uploads/2023/08/15-1-scaled.jpg",
     alt: "Couple hiking",
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1539150713678-2d8abb2f4b74?q=80&w=1974",
+    src: "https://plus.unsplash.com/premium_photo-1676667573109-273586405c96?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y291cGxlfGVufDB8fDB8fHww",
     alt: "Couple silhouette at sunset",
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1542378151504-0361264d50c1?q=80&w=1974",
+    src: "https://t4.ftcdn.net/jpg/01/83/48/51/360_F_183485123_7QykgFtQfdvfrMQ4bmHy94Zp8TInGbAD.jpg",
     alt: "Couple in autumn",
   },
 ];
@@ -50,11 +49,15 @@ const Gallery = () => {
   };
 
   const goToPrevious = () => {
-    setCurrentImage((prev) => (prev === 0 ? galleryImages.length - 1 : prev! - 1));
+    setCurrentImage((prev) =>
+      prev === 0 ? galleryImages.length - 1 : prev! - 1
+    );
   };
 
   const goToNext = () => {
-    setCurrentImage((prev) => (prev === galleryImages.length - 1 ? 0 : prev! + 1));
+    setCurrentImage((prev) =>
+      prev === galleryImages.length - 1 ? 0 : prev! + 1
+    );
   };
 
   // Handle keyboard events for lightbox
@@ -68,18 +71,20 @@ const Gallery = () => {
   return (
     <section id="gallery" className="section bg-couple-pink bg-opacity-10">
       <div className="container-custom">
-        <h2 className="text-3xl md:text-4xl font-serif text-center text-couple-deep mb-12">Our Moments</h2>
-        
+        <h2 className="text-3xl md:text-4xl font-serif text-center text-couple-deep mb-12">
+          Our Moments
+        </h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryImages.map((image, index) => (
-            <div 
-              key={image.id} 
+            <div
+              key={image.id}
               className="aspect-[4/5] relative rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-lg transition-shadow group"
               onClick={() => openLightbox(index)}
             >
-              <img 
-                src={image.src} 
-                alt={image.alt} 
+              <img
+                src={image.src}
+                alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-couple-deep bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -88,40 +93,49 @@ const Gallery = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Lightbox */}
         {currentImage !== null && (
-          <div 
+          <div
             className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
             onClick={closeLightbox}
             onKeyDown={handleKeyDown}
             tabIndex={0}
           >
-            <button 
+            <button
               className="absolute top-4 right-4 text-white p-2 hover:text-couple-pink"
               onClick={closeLightbox}
             >
               <X className="h-8 w-8" />
             </button>
-            
-            <button 
+
+            <button
               className="absolute left-4 text-white p-2 hover:text-couple-pink"
-              onClick={(e) => { e.stopPropagation(); goToPrevious(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrevious();
+              }}
             >
               <ChevronLeft className="h-10 w-10" />
             </button>
-            
-            <button 
+
+            <button
               className="absolute right-4 text-white p-2 hover:text-couple-pink"
-              onClick={(e) => { e.stopPropagation(); goToNext(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
             >
               <ChevronRight className="h-10 w-10" />
             </button>
-            
-            <div className="max-h-[90vh] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
-              <img 
-                src={galleryImages[currentImage].src} 
-                alt={galleryImages[currentImage].alt} 
+
+            <div
+              className="max-h-[90vh] max-w-[90vw]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={galleryImages[currentImage].src}
+                alt={galleryImages[currentImage].alt}
                 className="max-h-[90vh] max-w-[90vw] object-contain"
               />
             </div>
